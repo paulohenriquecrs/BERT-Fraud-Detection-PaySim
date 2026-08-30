@@ -217,11 +217,4 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-
-fraud_bert_mlm/
-fraud_bert_mlm_best/
-
-fraud_bert_classification/
-fraud_bert_classification_best/
-
 data/
