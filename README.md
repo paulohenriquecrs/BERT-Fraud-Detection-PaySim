@@ -418,16 +418,34 @@ The broader goal is to understand how Transformer based representation learning 
 
 ```text
 .
-│
-└── fraud_detection_bert.ipynb
-└── utils_bert.py
-└── utils_metrics.py
-└── README.md
+├── fraud_detection_bert.ipynb
+├── README.md
+├── utils_bert.py
+├── utils_metrics.py
+└── saved_models/
+    ├── fraud_bert_classification_best/
+    │   ├── config.json
+    │   ├── model.safetensors
+    │   └── training_args.bin
+    ├── fraud_bert_classification_frozen_best/
+    │   ├── config.json
+    │   ├── model.safetensors
+    │   └── training_args.bin
+    └── fraud_bert_mlm_best/
+        ├── config.json
+        ├── model.safetensors
+        └── training_args.bin
 ```
 
 `utils_bert.py` contains the custom datasets, MLM data collator, and training metrics.
 
 `utils_metrics.py` contains threshold selection and final evaluation utilities, including PR AUC, ROC AUC, F1, precision, recall, and confusion matrix calculations.
+
+`fraud_bert_mlm_best/` contains the optimal BERT backbone checkpoint achieved after unsupervised domain-adapted Masked Language Model (MLM) pre-training.
+
+`fraud_bert_classification_best/` contains the top-performing checkpoint from full end-to-end fine-tuning (backbone + classification head updated simultaneously).
+
+`fraud_bert_classification_frozen_best/` contains the top-performing checkpoint from feature extraction fine-tuning (BERT backbone frozen from pre-training, updating only the classification head).
 
 The evaluation utility selects the classification threshold using validation data and then applies that threshold to the test set, keeping threshold selection separate from final test evaluation.
 
